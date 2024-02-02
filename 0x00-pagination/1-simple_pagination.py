@@ -45,19 +45,15 @@ class Server:
 
         return self.__dataset
 
-
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """ get page with index_range"""
         assert isinstance(page, int), "page must be a signed integer"
-        assert isinstance(page_size, int) and page_size > 0, "page_size must be an integer"
-        result = index_range(page ,page_size)
+        assert isinstance(
+            page_size, int) and page_size > 0, "page_size must be an integer"
+        result = index_range(page, page_size)
         dataset = self.dataset()
         if page == "last":
             end_index = None
             return []
-        else: 
+        else:
             return dataset[result[0]: result[1]]
-            
-        
-        
-            
-        
