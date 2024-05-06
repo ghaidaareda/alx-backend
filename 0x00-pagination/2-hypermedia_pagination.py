@@ -4,7 +4,7 @@ Main file
 """
 import csv
 import math
-from typing import List
+from typing import Dict, List
 
 
 def index_range(page, page_size):
@@ -58,7 +58,8 @@ class Server:
         else:
             return dataset[result[0]: result[1]]
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
+        """get inf from page as dict"""
         start_index = (page - 1) * page_size
         end_index = start_index + page_size
         total_items = len(self.dataset())
