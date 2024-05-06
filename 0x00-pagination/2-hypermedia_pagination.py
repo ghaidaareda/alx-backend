@@ -64,7 +64,7 @@ class Server:
         total_items = len(self.dataset())
         total_pages = math.ceil(total_items / page_size)
         result_dict = {
-            'page_size': page_size,
+            'page_size': len(self.get_page(page, page_size)),
             'page': page,
             'data': self.get_page(page, page_size),
             'next_page': page + 1 if end_index < total_items else None,
