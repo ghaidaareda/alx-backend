@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 """
-Create a class LRUCache that inherits from BaseCaching
+Create a class MRUCache that inherits from BaseCaching
 and is a caching system
 """
 from base_caching import BaseCaching
 
 
-class LRUCache(BaseCaching):
+class MRUCache(BaseCaching):
     """
     A cache with First In, First Out
     """
