@@ -15,21 +15,22 @@ class FIFOCache(BaseCaching):
         """ init class"""
         super().__init__()  # inherit from parent class
 
-    def get_oldest_key(self):
-        """Retrieve the key of the oldest item in the cache."""
-        return next(iter(self.cache_data))
-
     def put(self, key, item):
         """
         remove oldest item from cache
         """
         if key is not None and item is not None:
+            self.cache_data[key] = item
             # Check if the cache is full
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
                 removed_key = self.get_oldest_key()
-                del self.cache_data[removed_key]
                 print(f'DISCARD:{removed_key}')
-        self.cache_data[key] = item
+                del self.cache_data[removed_key]
+            self.cache_data[key] = item
+
+    def get_oldest_key(self):
+        """Retrieve the key of the oldest item in the cache."""
+        return next(iter(self.cache_data))
 
     def get(self, key):
         """Retrieve an item from the cache."""
