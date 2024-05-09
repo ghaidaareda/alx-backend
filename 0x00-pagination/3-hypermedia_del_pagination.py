@@ -44,10 +44,10 @@ class Server:
         Retrieve a page of the dataset based on index and page_size parameters.
         """
         dataset = self.indexed_dataset()
-        
+
         # Assert that index is in a valid range
         assert index is None or 0 <= index < len(dataset), "Invalid index"
-        
+
         # Calculate the current start index of the return page
         if index is None:
             current_index = 0
