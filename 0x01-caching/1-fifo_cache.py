@@ -24,7 +24,7 @@ class FIFOCache(BaseCaching):
             # Check if the cache is full
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
                 removed_key = self.get_oldest_key()
-                print(f'DISCARD:{removed_key}')
+                print(f'DISCARD: {removed_key}')
                 del self.cache_data[removed_key]
             self.cache_data[key] = item
 
