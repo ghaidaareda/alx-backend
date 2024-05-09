@@ -20,17 +20,12 @@ class LIFOCache(BaseCaching):
         remove oldest item from cache
         """
         if key is not None and item is not None:
-            self.cache_data[key] = item
             # Check if the cache is full
-            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                removed_key = self.get_last_key()
+            if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+                removed_key = next(reversed(self.cache_data))
                 print(f'DISCARD: {removed_key}')
                 del self.cache_data[removed_key]
-            self.cache_data[key] = item
-
-    def get_last_key(self):
-        """Retrieve the key of the oldest item in the cache."""
-        return next(reversed(self.cache_data))
+        self.cache_data[key] = item
 
     def get(self, key):
         """Retrieve an item from the cache."""
