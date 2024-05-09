@@ -14,18 +14,21 @@ class LIFOCache(BaseCaching):
     def __init__(self):
         """ init class"""
         super().__init__()  # inherit from parent class
+        self.keys = []
 
     def put(self, key, item):
         """
         remove oldest item from cache
         """
         if key is not None and item is not None:
+            self.cache_data[key] = item
+            self.keys.append(key)
             # Check if the cache is full
-            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                removed_key = next(reversed(self.cache_data))
-                print(f'DISCARD: {removed_key}')
-                del self.cache_data[removed_key]
-        self.cache_data[key] = item
+            if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+                last_key = len(self.keys) - 2
+                discard = self.keys.pop(last_key)
+                del self.cache_data[discard]
+                print("DISCARD: " + discard)
 
     def get(self, key):
         """Retrieve an item from the cache."""
