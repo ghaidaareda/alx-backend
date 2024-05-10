@@ -22,12 +22,10 @@ class LFUCache(BaseCaching):
         if len(self.cache_data) >= self.MAX_ITEMS:
             # Find the least frequency used item (LFU algorithm)
             min_freq = min(self.frequency.values())
-            least_freq_keys = [
-                k for k, v in self.frequency.items() if v == min_freq]
+            least_freq_keys = [k for k, v in self.frequency.items() if v == min_freq]
 
             if len(least_freq_keys) > 1:
-                # If there are multiple keys with the least frequency, use LRU
-                # algorithm
+                # If there are multiple keys with the least frequency, use LRU algorithm
                 lru_key = min(self.cache_data, key=self.cache_data.get)
                 print("DISCARD: {}".format(lru_key))
                 del self.cache_data[lru_key]
@@ -50,3 +48,13 @@ class LFUCache(BaseCaching):
         self.frequency[key] += 1
 
         return self.cache_data[key]
+
+
+# Example usage:
+cache = LFUCache()
+
+# Adding 10 items
+for i in range(1, 11):
+    cache.put(i, str(i))
+
+cache.print_cache()
