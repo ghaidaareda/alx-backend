@@ -19,7 +19,7 @@ class LFUCache(BaseCaching):
         if key is None or item is None:
             return
 
-        if len(self.cache_data) > self.MAX_ITEMS:
+        if len(self.cache_data) >= self.MAX_ITEMS:
             # Find the least frequency used item (LFU algorithm)
             min_freq = min(self.frequency.values())
             least_freq_keys = [
