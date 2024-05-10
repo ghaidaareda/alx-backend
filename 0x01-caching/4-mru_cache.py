@@ -6,33 +6,32 @@ and is a caching system
 from base_caching import BaseCaching
 
 
-class LIFOCache(BaseCaching):
-    """
-    A cache with First In, First Out
-    """
+class MRUCache(BaseCaching):
+    """ MRU caching class """
 
     def __init__(self):
-        """ init class"""
-        super().__init__()  # inherit from parent class
-        self.keys = []
+        """ Initialize MRU cache """
+        super().__init__()
 
     def put(self, key, item):
-        """
-        remove oldest item from cache
-        """
-        if key is not None and item is not None:
-            self.cache_data[key] = item
-            self.keys.append(key)
-            # Check if the cache is full
-            if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                last_key = len(self.keys) - 2
-                discard = self.keys.pop(last_key)
-                del self.cache_data[discard]
-                print("DISCARD: " + discard)
+        """ Add an item to the cache """
+        if key is None or item is None:
+            return
+
+        if len(self.cache_data) >= self.MAX_ITEMS:
+            # Find the most recently used item (last accessed)
+            mru_key = max(self.cache_data, key=self.cache_data.get)
+            print("DISCARD: {}".format(mru_key))
+            del self.cache_data[mru_key]
+
+        self.cache_data[key] = item
 
     def get(self, key):
-        """Retrieve an item from the cache."""
-        if key is not None:
-            return self.cache_data.get(key)
-        else:
+        """ Retrieve an item from the cache """
+        if key is None or key not in self.cache_data:
             return None
+
+        # Move the accessed key to the end to mark it as most recently used
+        value = self.cache_data.pop(key)
+        self.cache_data[key] = value
+        return value
