@@ -18,7 +18,7 @@ class MRUCache(BaseCaching):
         if key is None or item is None:
             return
 
-        if len(self.cache_data) >= self.MAX_ITEMS:
+        if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
             # Find the most recently used item (last accessed)
             mru_key = max(self.cache_data, key=self.cache_data.get)
             print("DISCARD: {}".format(mru_key))
