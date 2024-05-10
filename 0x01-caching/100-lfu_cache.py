@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 """
-Create a class LFUCache that inherits from 
+Create a class LFUCache that inherits from
 BaseCaching and is a caching system
 """
 from base_caching import BaseCaching
+
 
 class LFUCache(BaseCaching):
     """ LFU caching class """
@@ -18,13 +19,15 @@ class LFUCache(BaseCaching):
         if key is None or item is None:
             return
 
-        if len(self.cache_data) >= self.MAX_ITEMS:
+        if len(self.cache_data) > self.MAX_ITEMS:
             # Find the least frequency used item (LFU algorithm)
             min_freq = min(self.frequency.values())
-            least_freq_keys = [k for k, v in self.frequency.items() if v == min_freq]
+            least_freq_keys = [
+                k for k, v in self.frequency.items() if v == min_freq]
 
             if len(least_freq_keys) > 1:
-                # If there are multiple keys with the least frequency, use LRU algorithm
+                # If there are multiple keys with the least frequency, use LRU
+                # algorithm
                 lru_key = min(self.cache_data, key=self.cache_data.get)
                 print("DISCARD: {}".format(lru_key))
                 del self.cache_data[lru_key]
