@@ -7,6 +7,7 @@ from flask_babel import Babel, format_datetime
 from datetime import datetime
 from flask_babel import gettext
 
+
 class Config:
     """Configuration class for the application."""
     LANGUAGES = ["en", "fr"]
