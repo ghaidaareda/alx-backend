@@ -17,10 +17,10 @@ class Config:
 app = Flask(__name__)
 app.config.from_object(Config)
 babel = Babel(app)
-
+app.url_map.strict_slashes = False
 
 @babel.localeselector
-def get_locale():
+def get_locale()-> str:
     """get locale"""
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
