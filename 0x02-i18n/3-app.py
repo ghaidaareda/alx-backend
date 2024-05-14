@@ -5,8 +5,7 @@ basic app
 from flask import Flask, render_template, request
 from flask_babel import Babel, format_datetime
 from datetime import datetime
-from flask_babel import _
-
+from flask_babel import gettext
 
 class Config:
     """Configuration class for the application."""
