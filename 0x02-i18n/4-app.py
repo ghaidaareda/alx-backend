@@ -22,18 +22,20 @@ app.url_map.strict_slashes = False
 
 
 @babel.localeselector
-def get_locale()-> str:
+def get_locale() -> str:
     """get locale"""
     loc = request.args.get('locale')
     if loc in app.config['LANGUAGES']:
         return loc
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
+
 @app.route('/')
 def get_index() -> str:
     """The home/index page.
     """
     return render_template('4-index.html')
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
